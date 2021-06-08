@@ -8,6 +8,7 @@ function Home() {
         <main className={s.background}>
             <Navbar />
             <Filters />
+            {/* <Games /> */}
         </main>
     )
 }
