@@ -1,27 +1,26 @@
 import React from 'react';
-
-export default function Game({ min, max, name, img, onClose, id }) {
+import s from './Game.module.css';
+export default function Game({ props }) {
+    const { name, background_image, genres } = props;
+    let genresNames = genres.reduce((acc, el) => acc.concat(`${el.name}, `), [])
+    let lastElement = genresNames[genresNames.length - 1];
+    genresNames[genresNames.length - 1] = lastElement.slice(0, lastElement.length - 2);
+    
     return (
-        <div className="card">
-            <div id="closeIcon" className="row">
-                <button onClick={onClose} className="btn btn-sm btn-danger">X</button>
-            </div>
+        <div className={s.game}>
+            {/* <div id="closeIcon" className="row">
+                <button className="btn btn-sm btn-danger">X</button>
+            </div> */}
             <div className="card-body">
-                <h5 className="card-title">{name}</h5>
+                <h5 className={s.title}>{name}</h5>
+                <img src={background_image} className={s.image} alt="game background" />
                 <div className="row">
-                    <div className="col-sm-4 col-md-4 col-lg-4">
-                        <p>Min</p>
-                        <p>{min}°</p>
-                    </div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">
-                        <p>Max</p>
-                        <p>{max}°</p>
-                    </div>
-                    <div className="col-sm-4 col-md-4 col-lg-4">
-                        <img className="iconoClima" src={"http://openweathermap.org/img/wn/" + img + "@2x.png"} width="80" height="80" alt="" />
+                    <div className={s.genres}>
+                        {genresNames}
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
