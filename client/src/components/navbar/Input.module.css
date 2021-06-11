@@ -1,3 +1,12 @@
 .form {
     margin: auto;
 }
+
+.input {
+    font-family: 'Press Start 2P', cursive;
+    width: 20rem;
+    height: 30px;
+    background:#161616;
+    color:white;
+    font-size:15px;
+}

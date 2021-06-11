@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import s from './Input.module.css'
+import { filterByName } from '../../redux/actions';
 //Navbar Styles ↓
 import '../../App.css'
 function Navbar() {
+    const dispatch = useDispatch();
+
+    const handleText = (e) => {
+        dispatch(filterByName(e.target.value));
+    }
+
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
     return (
-
         <>
             <nav className="navbar">
                 <div className="nav-container">
@@ -16,8 +23,8 @@ function Navbar() {
                     <i className="fas fa-code"></i>
                     </NavLink>
                     <form className={s.form} >
-                        <input type="text"  placeholder='Search for a game'/>
-                        <button>Search</button>
+                        <input className={s.input} type="text" onChange={handleText} placeholder='Search for a game' />
+                        {/* <button onClick={handleSearch}>Search</button> */}
                     </form>
                     <ul className={click ? "nav-menu active" : "nav-menu"}>
                         <li className="nav-item">

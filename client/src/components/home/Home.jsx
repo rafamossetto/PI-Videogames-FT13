@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import s from './Home.module.css';
 import Navbar from '../navbar/Navbar.jsx';
 import Filters from '../filters/Filters';
-import { useDispatch, useSelector } from 'react-redux';
-import { getVideogames } from '../../redux/actions';
 import Game from '../games/Game';
 
 function Home() {
-    const dispatch = useDispatch();
     const videogames = useSelector(state => state.videogames);
-    useEffect(() => {
-        dispatch(getVideogames())
-    }, [dispatch])
     return (
         <main className={s.background}>
             <Navbar />

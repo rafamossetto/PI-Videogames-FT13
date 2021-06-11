@@ -1,14 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { filterByGenres } from '../../redux/actions';
 import s from './Filters.module.css';
 
 function Filters() {
+    const dispatch = useDispatch();
+    const handleFilter = (e) => {
+        console.log(e.target.value)
+        // dispatch(filterByGenres(e.target.value))
+    }
+    
     return (
         <div>
             <div className={s.container}>
                 <label htmlFor="genres">
                     <span className={s.span}>Filter by Genres</span>
                 </label>
-                <select id='genres' className={s.select}>
+                <select id='genres' onChange={handleFilter} className={s.select}>
                     <option value="default">Default</option>
                     <option value="action">Action</option>
                     <option value="indie">Indie</option>
