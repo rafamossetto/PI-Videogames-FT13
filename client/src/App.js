@@ -16,6 +16,7 @@ function App() {
     <>
       <Route exact path='/' component={Landing} />
       <Route exact path='/videogames' component={Home} />
+      {/* <Route exact path='/videogame/:idVideogame' component={GameDetail} /> */}
     </>
   );
 }

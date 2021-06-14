@@ -16,12 +16,21 @@
     border-radius: .25rem;
 }
 .title {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    
 }
 .genres {
-    margin-top:5px;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ; */
+    margin: 2px 0px 0px 0px; 
+    font-size: 12px;
 }
 .image {
     width: 150px;
     height: 85px;
+}
+
+.rating {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 10px;
+    float:right;
 }

@@ -13,8 +13,6 @@ function Home() {
             <Filters />
             <div>
                 <div className={s.games}>
-                    {/* {videogames ? videogames.map((el, idx) => <Game props={videogames[idx]} key={idx} />) : 
-                    <img className={s.loading} src='https://media.tenor.com/images/cac6f4f6ddbe92403ef75aab346d1f59/tenor.gif'/>} */}
                     {Array.isArray(videogames) ? videogames.map((el, idx) => <Game props={videogames[idx]} key={idx} />) :
                         <div className={s.loading}></div>}
                 </div>

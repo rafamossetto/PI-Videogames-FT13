@@ -1,24 +1,23 @@
 import React from 'react';
 import s from './Game.module.css';
 export default function Game({ props }) {
-    const { name, background_image, genres } = props;
-    let genresNames = genres.reduce((acc, el) => acc.concat(`${el.name}, `), [])
-    let lastElement = genresNames[genresNames.length - 1];
-    genresNames[genresNames.length - 1] = lastElement.slice(0, lastElement.length - 2);
-    
+    let { name, background_image, genres, rating } = props;
+    console.log(name, rating)
+    //Agregamos una , y un espacio a cada genero
+    genres = genres.map((el, idx) => genres.length - 1 === idx ? el : el = `${el}, `);
+
     return (
         <div className={s.game}>
             {/* <div id="closeIcon" className="row">
                 <button className="btn btn-sm btn-danger">X</button>
             </div> */}
-            <div className="card-body">
+            <div>
+                <span className={s.rating}>{`${rating}★`}</span>
                 <h5 className={s.title}>{name}</h5>
-                <img src={background_image} className={s.image} alt="game background" />
-                <div className="row">
+                <img src={background_image} className={s.image} alt={'This background is not available'} />
                     <div className={s.genres}>
-                        {genresNames}
+                        {genres}
                     </div>
-                </div>
             </div>
 
         </div>
