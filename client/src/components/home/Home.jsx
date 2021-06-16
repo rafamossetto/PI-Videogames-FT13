@@ -4,6 +4,7 @@ import s from './Home.module.css';
 import Navbar from '../navbar/Navbar.jsx';
 import Filters from '../filters/Filters';
 import Game from '../games/Game';
+import Loading from '../loading/Loading';
 
 function Home() {
     const videogames = useSelector(state => state.videogames);
@@ -14,7 +15,7 @@ function Home() {
             <div>
                 <div className={s.games}>
                     {Array.isArray(videogames) ? videogames.map((el, idx) => <Game props={videogames[idx]} key={idx} />) :
-                        <div className={s.loading}></div>}
+                        <Loading/>}
                 </div>
             </div>
         </main>

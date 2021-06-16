@@ -97,7 +97,6 @@ background: linear-gradient(0deg, rgba(29,32,26,1) 0%, rgba(81,100,72,1) 100%, r
             
             .nav-item .active {
               color: #ffdd40;
-              border: 1px solid #ffdd40;
             }
             
             .nav-icon {

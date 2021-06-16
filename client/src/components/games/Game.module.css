@@ -17,7 +17,6 @@
 }
 .title {
     margin-bottom: 10px;
-    
 }
 .genres {
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ; */
@@ -33,4 +32,8 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 10px;
     float:right;
+}
+.link {
+    text-decoration: none;
+    color:inherit;
 }

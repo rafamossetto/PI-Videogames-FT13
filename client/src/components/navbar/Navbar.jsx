@@ -35,7 +35,7 @@ function Navbar() {
                         <li className="nav-item">
                             <NavLink
                                 exact
-                                to="/"
+                                to="/videogames"
                                 activeClassName="active"
                                 className="nav-links"
                                 onClick={handleClick}
@@ -44,12 +44,12 @@ function Navbar() {
                         <li className="nav-item">
                             <NavLink
                                 exact
-                                to="/upload"
+                                to="/create"
                                 activeClassName="active"
                                 className="nav-links"
                                 onClick={handleClick}
                             >
-                                Upload
+                                Create
                             </NavLink>
                         </li>
                         <li className="nav-item">
