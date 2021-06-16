@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import s from './CreateGame.module.css'
 import Navbar from '../navbar/Navbar'
+import axios from 'axios';
+
 function CreateGame() {
     const [form, setForm] = useState({
         name: '',
@@ -11,7 +13,6 @@ function CreateGame() {
         platforms: []
     });
     const handleChange = e => {
-        console.log()
         if (e.target.parentNode.parentNode.id === 'genres') {
             !e.target.checked ? setForm({
                 ...form,
@@ -50,7 +51,7 @@ function CreateGame() {
 
     const handleSubmit = e => {
         e.preventDefault()
-
+        axios.post('http://localhost:3001/videogame', form)
     }
     return (
         <div className={s.creategame}>
