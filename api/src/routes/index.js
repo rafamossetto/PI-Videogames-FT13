@@ -8,52 +8,80 @@ const axios = require('axios').default;
 // Ejemplo: const authRouter = require('./auth.js');
 
 // GET a '/videogames
-router.get('/videogames', (req, res) => {
+router.get('/videogames', async (req, res) => {
     if (req.query.name) {
-        return axios.get(`https://api.rawg.io/api/games?search=${req.query.name}&key=${APIKEY}`)
-            .then(response => {
-                if (!response.data.count) return res.send(`No se encontro ningun videojuego con el nombre "${req.query.name}"`);
-                response.data.results.forEach((e) => {
-                    let generos = []
-                    e.genres.forEach(g => generos.push(g.name))
-                    e.genres = generos;
-                })
-                return res.json(response.data.results.splice(0, 15))
+        try {
+            const response = await axios.get(`https://api.rawg.io/api/games?search=${req.query.name}&key=${APIKEY}`);
+            if (!response.data.count) return res.send(`No se encontro ningun videojuego con el nombre "${req.query.name}"`);
+            response.data.results.forEach((e) => {
+                let generos = []
+                e.genres.forEach(g => generos.push(g.name))
+                e.genres = generos;
             })
-            .catch(err => res.status(500).json(err))
+            return res.json(response.data.results)
+        } catch (err) {
+            return res.send(500, err)
+        }
     } else {
-        axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`)
-            .then(response => {
+        try {
+            // let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
+            // response.data.results.forEach((e) => {
+            //     let generos = []
+            //     e.genres.forEach(g => generos.push(g.name))
+            //     e.genres = generos;
+            // })
+            // let pages = 0;
+            // let results = [...response.data.results];
+            // while (pages < 4) {
+            //     pages++;
+            //     response = await axios.get(response.data.next)
+            //     response.data.results.forEach((e) => {
+            //         let generos = []
+            //         e.genres.forEach(g => generos.push(g.name))
+            //         e.genres = generos;
+            //     })
+            //     results = [...results, ...response.data.results]
+            // }
+            let pages = 0;
+            let results = [];
+            let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
+            while (pages < 2) {
+                pages++;
                 response.data.results.forEach((e) => {
                     let generos = []
                     e.genres.forEach(g => generos.push(g.name))
                     e.genres = generos;
                 })
-                res.json(response.data.results.splice(0, 15))
-            })
-            .catch(err => res.status(500).json(err))
+                results = [...results, ...response.data.results]
+                response = await axios.get(response.data.next)
+            }
+            return res.json(results)
+        } catch (err) {
+            return res.sendStatus(501, err)
+        }
     }
 })
 // GET /videogame/:idVideoGame
-router.get('/videogame/:idVideogame', (req, res) => {
+router.get('/videogame/:idVideogame', async (req, res) => {
     const { idVideogame } = req.params
     const id = parseInt(idVideogame);
-    axios.get(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`)
-        .then(response => {
-            let { name, background_image, genres, description, released, rating, platforms } = response.data;
-            genres = genres.map( g => g.name);
-            platforms = platforms.map( p => p.platform.name);
-            res.json({
-                name,
-                background_image,
-                genres,
-                description,
-                released,
-                rating,
-                platforms
-            })
+    try {
+        const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`);
+        let { name, background_image, genres, description, released, rating, platforms } = response.data;
+        genres = genres.map(g => g.name);
+        platforms = platforms.map(p => p.platform.name);
+        return res.json({
+            name,
+            background_image,
+            genres,
+            description,
+            released,
+            rating,
+            platforms
         })
-        .catch(err => res.status(500).json(err))
+    } catch (err) {
+        return res.send(500, err)
+    }
 })
 // GET a /genres
 router.get('/genres', async (req, res) => {
