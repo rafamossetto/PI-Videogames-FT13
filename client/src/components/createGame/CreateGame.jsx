@@ -91,7 +91,7 @@ function CreateGame() {
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="RPG">RPG</label>
-                                <input name='RPG' type="checkbox" id="" />
+                                <input name='RPG' type="checkbox" id="RPG" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Strategy">Strategy</label>
