@@ -40,7 +40,9 @@ router.get('/videogame/:idVideogame', (req, res) => {
     const id = parseInt(idVideogame);
     axios.get(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`)
         .then(response => {
-            const { name, background_image, genres, description, released, rating, platforms } = response.data;
+            let { name, background_image, genres, description, released, rating, platforms } = response.data;
+            genres = genres.map( g => g.name);
+            platforms = platforms.map( p => p.platform.name);
             res.json({
                 name,
                 background_image,
