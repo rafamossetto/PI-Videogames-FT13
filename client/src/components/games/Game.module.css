@@ -1,7 +1,9 @@
 .game {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    margin: 10px;
+    margin-right: 8px;
+    margin-left: 8px;
+    margin-top: 8px;
     width: 14rem;
     position: relative;
     display: -ms-flexbox;
