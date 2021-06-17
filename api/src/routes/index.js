@@ -18,30 +18,12 @@ router.get('/videogames', async (req, res) => {
                 e.genres.forEach(g => generos.push(g.name))
                 e.genres = generos;
             })
-            return res.json(response.data.results)
+            return res.json(response.data.results.splice(0, 15))
         } catch (err) {
             return res.send(500, err)
         }
     } else {
         try {
-            // let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
-            // response.data.results.forEach((e) => {
-            //     let generos = []
-            //     e.genres.forEach(g => generos.push(g.name))
-            //     e.genres = generos;
-            // })
-            // let pages = 0;
-            // let results = [...response.data.results];
-            // while (pages < 4) {
-            //     pages++;
-            //     response = await axios.get(response.data.next)
-            //     response.data.results.forEach((e) => {
-            //         let generos = []
-            //         e.genres.forEach(g => generos.push(g.name))
-            //         e.genres = generos;
-            //     })
-            //     results = [...results, ...response.data.results]
-            // }
             let pages = 0;
             let results = [];
             let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
@@ -93,6 +75,7 @@ router.get('/genres', async (req, res) => {
 //POST a /videogame
 router.post('/videogame', (req, res) => {
     // const { game } = req.body
+    console.log(req.body)
     res.json(req.body)
 })
 
