@@ -4,6 +4,7 @@ import Navbar from '../navbar/Navbar'
 import axios from 'axios';
 
 function CreateGame() {
+    const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -12,6 +13,7 @@ function CreateGame() {
         genres: [],
         platforms: []
     });
+
     const handleChange = e => {
         if (e.target.parentNode.parentNode.id === 'genres') {
             !e.target.checked ? setForm({
@@ -47,8 +49,25 @@ function CreateGame() {
             default:
                 break;
         }
+        setErrors(validate({
+            ...form,
+            [e.target.name]: e.target.value
+        }))
     }
-
+    const validate = form => {
+        let errors = {};
+        if (!form.name) {
+            errors.name = 'Username is required';
+        } else if (!/\S+@\S+\.\S+/.test(form.name)) {
+            errors.name = 'Username is invalid';
+        }
+        if (!form.description) {
+            errors.password = 'Password is required';
+        } else if (!/(?=.*[0-9])/.test(form.description)) {
+            errors.password = 'Password is invalid'
+        }
+        return errors;
+    }
     const handleSubmit = e => {
         e.preventDefault()
         axios.post('http://localhost:3001/videogame', form)
@@ -176,12 +195,11 @@ function CreateGame() {
                             </div>
                         </div>
                         <br />
-                        <button className={s.btn}>Create</button>
+                        <button className={s.btn} disabled={true}>Create</button>
                     </form>
                 </div>
             </div>
         </div>
     )
 }
-
 export default CreateGame;
