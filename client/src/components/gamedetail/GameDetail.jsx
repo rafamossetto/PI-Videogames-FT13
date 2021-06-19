@@ -23,11 +23,11 @@ function GameDetail() {
                 <div className={s.container}>
                     {videogameDetail ? <div>
                         <h3 className={s.name}>{videogameDetail.name}</h3>
-                        <img className={s.image} src={videogameDetail.background_image} alt="" />
-                        <p className={s.description}>{videogameDetail.description.replace( /(<([^>]+)>)/ig, '')}</p>
+                        <img className={s.image} src={videogameDetail.background_image || 'https://myvideogamelist.com/assets/images/default.png'} alt="" />
+                        <p className={s.description}>{videogameDetail.description.replace(/(<([^>]+)>)/ig, '')}</p>
                         <p className={s.genres}>{`Genres: ${videogameDetail.genres.join(', ')}`}</p>
-                        <p className={s.genres}>{`Platforms: ${videogameDetail.platforms.join(', ')}`}</p>
-                        <p className={s.genres}>{`Release Date: ${videogameDetail.released || 'None'}`}</p>
+                        <p className={s.genres}>{`Platforms: ${typeof videogameDetail.platforms === 'string' ? videogameDetail.platforms : videogameDetail.platforms.join(', ')}`}</p>
+                        <p className={s.genres}>{`Release Date: ${videogameDetail.releaseDate || 'None'}`}</p>
                         <p className={s.genres}>{`Rating: ★ ${videogameDetail.rating}`}</p>
 
                     </div> : <h1>Cargando</h1>}

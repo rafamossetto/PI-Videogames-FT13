@@ -57,20 +57,31 @@ function CreateGame() {
     const validate = form => {
         let errors = {};
         if (!form.name) {
-            errors.name = 'Username is required';
-        } else if (!/\S+@\S+\.\S+/.test(form.name)) {
-            errors.name = 'Username is invalid';
+            errors.name = 'Game Name is required';
+        } else if (!/^\w{4,}$/.test(form.name)) {
+            errors.name = 'Game Name must have at least 4 characters';
         }
         if (!form.description) {
-            errors.password = 'Password is required';
-        } else if (!/(?=.*[0-9])/.test(form.description)) {
-            errors.password = 'Password is invalid'
+            errors.description = 'Description is required';
+        } else if (!/^\w{8,}$/.test(form.description)) {
+            errors.description = 'Description must have at least 8 characters'
+        }
+        if (!form.releaseDate) errors.releaseDate = 'Release Date is required';
+        if (!form.rating){
+            errors.rating = 'Rating is required';
+        } else if (!/^[1-5]$/.test(form.rating)){
+            errors.rating = 'Rating must be between 1 and 5';
         }
         return errors;
     }
     const handleSubmit = e => {
         e.preventDefault()
+        validate(form);
+        if (Object.values(errors).length){
+            return alert(Object.values(errors).join('\n'));
+        }
         axios.post('http://localhost:3001/videogame', form)
+        alert(`Game created succesfully: ${form.name}`)
     }
     return (
         <div className={s.creategame}>
@@ -81,19 +92,19 @@ function CreateGame() {
                     <form onSubmit={handleSubmit} onChange={handleChange}>
                         <label htmlFor='name'>Game Name: </label>
                         <br />
-                        <input placeholder='Name' type="text" id='name' name='name' />
+                        <input placeholder='Name' type="text" id='name' className={errors.name && s.error} name='name' />
                         <br />
                         <label htmlFor="description">Description: </label>
                         <br />
-                        <textarea name='description' placeholder='Description...' className={s.textarea} id="description" cols="30" rows="3" />
+                        <textarea name='description' placeholder='Description...' className={`${errors.description ? s.error : ''} ${s.textarea}`} id="description" cols="30" rows="3" />
                         <br />
                         <label htmlFor="date">Release Date: </label>
                         <br />
-                        <input name='date' type="date" id="date" />
+                        <input name='date' className={errors.releaseDate && s.error} type="date" id="date" />
                         <br />
                         <label htmlFor="rating">Rating: </label>
                         <br />
-                        <input name='rating' placeholder='Rate from 1 to 5' type="tel" id="rating" maxLength='1' />
+                        <input name='rating' className={errors.rating && s.error} placeholder='Rate from 1 to 5' type="tel" id="rating" maxLength='1' />
                         <br />
                         <div id='genres' className={s.genresContainer}>
                             <label className={s.labelTitle}>Genres </label>

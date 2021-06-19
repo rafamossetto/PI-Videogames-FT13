@@ -66,3 +66,7 @@
     font-weight: bold;
     padding:8px;    
 }
+
+.error {
+    border: 2px solid red;
+}
