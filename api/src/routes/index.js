@@ -24,13 +24,13 @@ router.get('/videogames', async (req, res) => {
 
     if (req.query.name) {
         try {
-            const response = await axios.get(`https://api.rawg.io/api/games?search=${req.query.name}&key=${APIKEY}`);
+            let response = await axios.get(`https://api.rawg.io/api/games?search=${req.query.name}&key=${APIKEY}`);
             if (!response.data.count) return res.send(`No se encontro ningun videojuego con el nombre "${req.query.name}"`);
-            response.data.results.reduce((acc, el) => acc.concat({
+            response.data.results = response.data.results.reduce((acc, el) => acc.concat({
                 ...el,
                 genres: el.genres.map(g => g.name)
             }), [])
-            const filteredGamesDb = videogamesDb.filter(g => g.name === req.query.name);
+            const filteredGamesDb = videogamesDb.filter(g => g.name.toLowerCase().includes(req.query.name.toLowerCase()));
             const results = [...filteredGamesDb, ...response.data.results.splice(0, 15)];
             return res.json(results)
         } catch (err) {
@@ -43,14 +43,14 @@ router.get('/videogames', async (req, res) => {
             let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
             while (pages < 2) {
                 pages++;
-                response.data.results.reduce((acc, el) => acc.concat({
+                response.data.results = response.data.results.reduce((acc, el) => acc.concat({
                     ...el,
                     genres: el.genres.map(g => g.name)
                 }), [])
                 results = [...results, ...response.data.results]
                 response = await axios.get(response.data.next)
             }
-            return res.json(...videogamesDb, ...results)
+            return res.json(results)
         } catch (err) {
             console.log(err)
             return res.sendStatus(500)
@@ -60,10 +60,22 @@ router.get('/videogames', async (req, res) => {
 // GET /videogame/:idVideoGame
 router.get('/videogame/:idVideogame', async (req, res) => {
     const { idVideogame } = req.params
-    const id = parseInt(idVideogame);
+    if (idVideogame.includes('-')) {
+        let videogameDb = await Videogame.findOne({
+            where: {
+                id: idVideogame,
+            },
+            include: Genre
+        })
+        videogameDb = JSON.stringify(videogameDb);
+        videogameDb = JSON.parse(videogameDb);
+        videogameDb.genres = videogameDb.genres.map(g => g.name);
+        res.json(videogameDb)
+    };
+
     try {
-        const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${APIKEY}`);
-        let { name, background_image, genres, description, released, rating, platforms } = response.data;
+        const response = await axios.get(`https://api.rawg.io/api/games/${idVideogame}?key=${APIKEY}`);
+        let { name, background_image, genres, description, released: releaseDate, rating, platforms } = response.data;
         genres = genres.map(g => g.name);
         platforms = platforms.map(p => p.platform.name);
         return res.json({
@@ -71,7 +83,7 @@ router.get('/videogame/:idVideogame', async (req, res) => {
             background_image,
             genres,
             description,
-            released,
+            releaseDate,
             rating,
             platforms
         })
