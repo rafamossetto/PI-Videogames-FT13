@@ -18,10 +18,10 @@ function CreateGame() {
         if (e.target.parentNode.parentNode.id === 'genres') {
             !e.target.checked ? setForm({
                 ...form,
-                genres: form.genres.filter(x => e.target.name !== x)
+                genres: form.genres.filter(x => e.target.value !== x)
             }) : setForm({
                 ...form,
-                genres: form.genres.concat(e.target.name)
+                genres: form.genres.concat(e.target.value)
             })
         }
         if (e.target.parentNode.parentNode.id === 'platforms') {
@@ -99,63 +99,63 @@ function CreateGame() {
                             <label className={s.labelTitle}>Genres </label>
                             <div className={s.divgenre}>
                                 <label htmlFor="Action">Action</label>
-                                <input name='Action' type="checkbox" id="Action" />
-                            </div>
-                            <div className={s.divgenre}>
-                                <label htmlFor="Adventure">Adventure</label>
-                                <input name='Adventure' type="checkbox" id="Adventure" />
+                                <input name='Action' value='1' type="checkbox" id="Action" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Indie">Indie</label>
-                                <input name='Indie' type="checkbox" id="Indie" />
+                                <input name='Indie' value='2' type="checkbox" id="Indie" />
+                            </div>
+                            <div className={s.divgenre}>
+                                <label htmlFor="Adventure">Adventure</label>
+                                <input name='Adventure' value='3' type="checkbox" id="Adventure" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="RPG">RPG</label>
-                                <input name='RPG' type="checkbox" id="RPG" />
+                                <input name='RPG' value='4' type="checkbox" id="RPG" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Strategy">Strategy</label>
-                                <input name='Strategy' type="checkbox" id="Strategy" />
+                                <input name='Strategy' value='5' type="checkbox" id="Strategy" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Shooter">Shooter</label>
-                                <input name='Shooter' type="checkbox" id="Shooter" />
+                                <input name='Shooter' value='6' type="checkbox" id="Shooter" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Casual">Casual</label>
-                                <input name='Casual' type="checkbox" id="Casual" />
+                                <input name='Casual' value='7' type="checkbox" id="Casual" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Simulation">Simulation</label>
-                                <input name='Simulation' type="checkbox" id="Simulation" />
+                                <input name='Simulation' value='8' type="checkbox" id="Simulation" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Puzzle">Puzzle</label>
-                                <input name='Puzzle' type="checkbox" id="Puzzle" />
+                                <input name='Puzzle' value='9' type="checkbox" id="Puzzle" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Arcade">Arcade</label>
-                                <input name='Arcade' type="checkbox" id="Arcade" />
+                                <input name='Arcade' value='10' type="checkbox" id="Arcade" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Platformer">Platformer</label>
-                                <input name='Platformer' type="checkbox" id="Platformer" />
+                                <input name='Platformer' value='11' type="checkbox" id="Platformer" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Racing">Racing</label>
-                                <input name='Racing' type="checkbox" id="Racing" />
+                                <input name='Racing' value='12' type="checkbox" id="Racing" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Massively-Multiplayer">Massively-Multiplayer</label>
-                                <input name='Massively-Multiplayer' type="checkbox" id="Massively-Multiplayer" />
+                                <input name='Massively-Multiplayer' value='13' type="checkbox" id="Massively-Multiplayer" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Sports">Sports</label>
-                                <input name='Sports' type="checkbox" id="Sports" />
+                                <input name='Sports' value='14' type="checkbox" id="Sports" />
                             </div>
                             <div className={s.divgenre}>
                                 <label htmlFor="Fighting">Fighting</label>
-                                <input name='Fighting' type="checkbox" id="Fighting" />
+                                <input name='Fighting' value='15' type="checkbox" id="Fighting" />
                             </div>
                         </div>
                         {/* END GENRES */}
@@ -195,7 +195,7 @@ function CreateGame() {
                             </div>
                         </div>
                         <br />
-                        <button className={s.btn} disabled={true}>Create</button>
+                        <button className={s.btn} disabled={false}>Create</button>
                     </form>
                 </div>
             </div>

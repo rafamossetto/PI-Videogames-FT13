@@ -11,7 +11,6 @@ function GameDetail() {
     const params = useParams();
     const { idVideogame } = params
     const videogameDetail = useSelector(state => state.videogameDetail)
-    // const { background_image, name, description, genres, platforms, rating, released, id } = videogameDetail
 
     useEffect(() => {
         dispatch(getVideogameDetail(idVideogame))
@@ -26,8 +25,8 @@ function GameDetail() {
                         <h3 className={s.name}>{videogameDetail.name}</h3>
                         <img className={s.image} src={videogameDetail.background_image} alt="" />
                         <p className={s.description}>{videogameDetail.description.replace( /(<([^>]+)>)/ig, '')}</p>
-                        <p className={s.genres}>{`Genres: ${videogameDetail.genres}`}</p>
-                        <p className={s.genres}>{`Platforms: ${videogameDetail.platforms}`}</p>
+                        <p className={s.genres}>{`Genres: ${videogameDetail.genres.join(', ')}`}</p>
+                        <p className={s.genres}>{`Platforms: ${videogameDetail.platforms.join(', ')}`}</p>
                         <p className={s.genres}>{`Release Date: ${videogameDetail.released || 'None'}`}</p>
                         <p className={s.genres}>{`Rating: ★ ${videogameDetail.rating}`}</p>
 

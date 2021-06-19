@@ -4,8 +4,7 @@ import s from './Game.module.css';
 
 function Game({ props }) {
     let { name, background_image, genres, rating, id } = props;
-    //Agregamos una , y un espacio a cada genero
-    genres = genres.map((el, idx) => genres.length - 1 === idx ? el : el = `${el}, `);
+    genres = genres?.join(', ')
 
     return (
         <div className={s.game}>

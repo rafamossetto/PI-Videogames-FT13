@@ -15,7 +15,7 @@ function Home() {
 
     const indexOfLastGame = currentPage * gamesPerPage; // 15
     const indexOfFirstGame = indexOfLastGame - gamesPerPage; // 15 - 15
-    let currentGames = videogames?.slice(indexOfFirstGame, indexOfLastGame);
+    const currentGames = videogames?.slice(indexOfFirstGame, indexOfLastGame);
     const paginate = pageNumber => setCurrentPage(pageNumber);
     return (
         <main className={s.background}>
@@ -23,7 +23,7 @@ function Home() {
             <Filters />
             <div>
                 <div className={s.games}>
-                    {currentGames ? currentGames.map((el, idx) => <Game props={currentGames[idx]} key={idx} />) : <Loading />}
+                    {currentGames ? currentGames.map((_, idx) => <Game props={currentGames[idx]} key={idx} />) : <Loading />}
                 </div>
                 <Pagination gamesPerPage={gamesPerPage} totalGames={videogames?.length} paginate={paginate} />
             </div>
