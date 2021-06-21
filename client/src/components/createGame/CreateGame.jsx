@@ -90,7 +90,7 @@ function CreateGame() {
                 <div className={s.container}>
                     <h1 className={s.title}>Create your own Game</h1>
                     <form onSubmit={handleSubmit} onChange={handleChange}>
-                        <label htmlFor='name'>Game Name: </label>
+                        <label htmlFor='name'>Name: </label>
                         <br />
                         <input placeholder='Name' type="text" id='name' className={errors.name && s.error} name='name' />
                         <br />
@@ -206,7 +206,7 @@ function CreateGame() {
                             </div>
                         </div>
                         <br />
-                        <button className={s.btn} disabled={false}>Create</button>
+                        <button className={s.btn} type='submit'>Create</button>
                     </form>
                 </div>
             </div>

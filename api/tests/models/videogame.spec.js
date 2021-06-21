@@ -14,8 +14,16 @@ describe('Videogame model', () => {
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Super Mario Bros' });
+      it('should throw an error if description is null', (done) => {
+        Videogame.create({ name: 'Dog Hunt' })
+          .then(() => done(new Error('It requires a valid description')))
+          .catch(() => done());
+      });
+      it('It should work when its a valid name and a valid description', () => {
+        Videogame.create({
+          name: 'Super Mario Bros',
+          description: 'A jumps game',
+        })
       });
     });
   });

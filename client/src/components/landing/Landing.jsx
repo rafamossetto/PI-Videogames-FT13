@@ -6,7 +6,7 @@ function Landing() {
     return (
         <div className={s.landing}>
             <h1 className={s.title}>Videogames App</h1>
-            <Link to={'/videogames'}>
+            <Link to='/videogames'>
                 <button className={s.eightbitBtn}>Play!</button>
             </Link>
         </div>
