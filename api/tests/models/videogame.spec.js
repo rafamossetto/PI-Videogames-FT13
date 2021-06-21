@@ -19,10 +19,20 @@ describe('Videogame model', () => {
           .then(() => done(new Error('It requires a valid description')))
           .catch(() => done());
       });
-      it('It should work when its a valid name and a valid description', () => {
+      it('should throw an error if platforms is null', (done) => {
         Videogame.create({
           name: 'Super Mario Bros',
           description: 'A jumps game',
+        })
+          .then(() => done(new Error('It requires a valid platforms')))
+          .catch(() => done());
+      });
+      
+      it('It should work when its a valid name, a valid description, and platforms', () => {
+        Videogame.create({
+          name: 'Super Mario Bros',
+          description: 'A jumps game',
+          platforms: 'iOS'
         })
       });
     });

@@ -25,7 +25,7 @@ router.get('/videogames', async (req, res) => {
     if (req.query.name) {
         try {
             let response = await axios.get(`https://api.rawg.io/api/games?search=${req.query.name}&key=${APIKEY}`);
-            if (!response.data.count) return res.send(`No se encontro ningun videojuego con el nombre "${req.query.name}"`);
+            if (!response.data.count) return res.status(404).send(`No se encontro ningun videojuego con el nombre "${req.query.name}"`);
             response.data.results = response.data.results.reduce((acc, el) => acc.concat({
                 ...el,
                 genres: el.genres.map(g => g.name)
@@ -41,7 +41,7 @@ router.get('/videogames', async (req, res) => {
             let pages = 0;
             let results = [...videogamesDb];
             let response = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}`);
-            while (pages < 2) {
+            while (pages < 4) {
                 pages++;
                 response.data.results = response.data.results.reduce((acc, el) => acc.concat({
                     ...el,
