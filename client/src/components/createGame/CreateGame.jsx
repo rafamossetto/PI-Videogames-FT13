@@ -8,7 +8,7 @@ function CreateGame() {
     const [form, setForm] = useState({
         name: '',
         description: '',
-        date: '',
+        releaseDate: '',
         rating: 0,
         genres: [],
         platforms: []
@@ -80,8 +80,7 @@ function CreateGame() {
         if (Object.values(errors).length || checkboxsErrors.length) {
             return alert(Object.values(errors).concat(checkboxsErrors).join('\n'));
         }
-        console.log(form)
-        // axios.post('http://localhost:3001/videogames', form)
+        axios.post('http://localhost:3001/videogame', form)
         alert(`${form.name} created succesfully`)
         // window.location.href = 'http://localhost:3000/videogames'
     }
@@ -103,7 +102,7 @@ function CreateGame() {
                         <br />
                         <label htmlFor="date">Release Date: </label>
                         <br />
-                        <input name='date' className={errors.releaseDate && s.error} type="date" id="date" required />
+                        <input name='releaseDate' className={errors.releaseDate && s.error} type="date" id="date" required />
                         <br />
                         <label htmlFor="rating">Rating: </label>
                         <br />
