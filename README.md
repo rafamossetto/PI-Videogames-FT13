@@ -1,4 +1,4 @@
-# Project - Videogames App
+# 📚Individual Project - Videogames App 🕹
 
 <p align="right">
   <img height="200" src="./videogame.png" />
